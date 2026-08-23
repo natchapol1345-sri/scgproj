@@ -1,0 +1,131 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+*.egg
+.eggs/
+build/
+dist/
+develop-eggs/
+downloads/
+eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+MANIFEST
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+.python-version
+
+# Testing / coverage
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Logs
+*.log
+logs/
+lightning_logs/
+wandb/
+runs/
+tb_logs/
+mlruns/
+
+# Model weights / checkpoints
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.bin
+*.onnx
+*.h5
+*.pkl
+*.pickle
+checkpoints/
+weights/
+pretrained/
+models/
+hf_cache/
+.cache/
+
+# Data / outputs
+output/
+outputs/
+results/
+data/
+datasets/
+
+
+# 3D assets (large)
+*.ply
+*.obj
+*.glb
+*.gltf
+*.fbx
+*.stl
+*.usd
+*.usdz
+*.blend
+*.blend1
+
+# Media
+*.mp4
+*.avi
+*.mov
+*.mkv
+
+# Compiled
+*.o
+*.a
+*.dll
+*.dylib
+
+# test folder
+test/
+
+# Obsidian vault — per-machine UI state (notes + plugin config stay tracked)
+obsidian/
+CLAUDE.md

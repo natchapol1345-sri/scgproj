@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="ICT 3D Reconstruction — Convert multi-view images into watertight 3D meshes with real-world volume measurement.">
+  <title>ICT 3D Reconstruction</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- ========== NAVBAR ========== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#" class="nav-logo" id="nav-logo">
+        <span class="logo-text">ICT</span>
+      </a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#" class="nav-link active" data-screen="home" id="nav-home">Home</a></li>
+        <li><a href="#" class="nav-link" data-screen="input" id="nav-input">Input</a></li>
+        <li><a href="#" class="nav-link" data-screen="processing" id="nav-processing">Processing</a></li>
+        <li><a href="#" class="nav-link" data-screen="result" id="nav-result">Result</a></li>
+      </ul>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ========== SCREEN 1: HOME ========== -->
+  <section class="screen screen--home active" id="screen-home">
+    <!-- Hero -->
+    <div class="hero">
+      <div class="hero-bg-grid"></div>
+      <div class="hero-content">
+        <div class="hero-badge">
+          <i class="fas fa-graduation-cap"></i>
+          <span>Senior Project</span>
+        </div>
+        <h1 class="hero-title">
+          <span class="title-line">Multi-View 3D</span>
+          <span class="title-line gradient-text">Reconstruction</span>
+          <span class="title-line">Pipeline</span>
+        </h1>
+        <p class="hero-subtitle">
+          Transform ordinary photographs into precise watertight 3D meshes with real-world
+          volume measurement — powered by <strong>VGGT</strong> (Visual Geometry Grounded Transformer).
+        </p>
+        <div class="hero-actions">
+          <button class="btn btn-primary btn-lg" id="hero-start-btn">
+            <i class="fas fa-play"></i>
+            <span>Start Pipeline</span>
+          </button>
+          <button class="btn btn-outline btn-lg" id="hero-learn-btn">
+            <i class="fas fa-book-open"></i>
+            <span>Learn More</span>
+          </button>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <span class="stat-value">7</span>
+            <span class="stat-label">Pipeline Stages</span>
+          </div>
+
+          <div class="stat-item">
+            <span class="stat-value">&lt;1%</span>
+            <span class="stat-label">Volume Error</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="floating-cube">
+          <div class="cube">
+            <div class="cube-face front"></div>
+            <div class="cube-face back"></div>
+            <div class="cube-face right"></div>
+            <div class="cube-face left"></div>
+            <div class="cube-face top"></div>
+            <div class="cube-face bottom"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pipeline Overview -->
+    <div class="section" id="pipeline-overview">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">How It Works</span>
+          <h2 class="section-title">Pipeline Overview</h2>
+          <p class="section-desc">From raw images to measured 3D volumes in seven automated stages</p>
+        </div>
+        <div class="pipeline-flow">
+          <div class="pipeline-step" data-step="1">
+            <div class="step-icon"><i class="fas fa-brain"></i></div>
+            <div class="step-info">
+              <span class="step-number">Stage 1</span>
+              <h3>Model Inference</h3>
+              <p>VGGT-1B transformer predicts 3D point maps and camera parameters from multi-view images</p>
+            </div>
+          </div>
+          <div class="pipeline-connector"><i class="fas fa-chevron-right"></i></div>
+          <div class="pipeline-step" data-step="2">
+            <div class="step-icon"><i class="fas fa-cloud"></i></div>
+            <div class="step-info">
+              <span class="step-number">Stage 2</span>
+              <h3>PLY Export</h3>
+              <p>Adaptive confidence filtering, background masking, and statistical outlier removal</p>
+            </div>
+          </div>
+          <div class="pipeline-connector"><i class="fas fa-chevron-right"></i></div>
+          <div class="pipeline-step" data-step="3">
+            <div class="step-icon"><i class="fas fa-scissors"></i></div>
+            <div class="step-info">
+              <span class="step-number">Stage 3</span>
+              <h3>Clean & Extract</h3>
+              <p>RANSAC leveling, DBSCAN clustering, and ArUco-aware object segmentation</p>
+            </div>
+          </div>
+          <div class="pipeline-connector"><i class="fas fa-chevron-right"></i></div>
+          <div class="pipeline-step" data-step="4">
+            <div class="step-icon"><i class="fas fa-cubes"></i></div>
+            <div class="step-info">
+              <span class="step-number">Stage 4</span>
+              <h3>Reconstruction</h3>
+              <p>Poisson surface reconstruction with adaptive depth and density filtering</p>
+            </div>
+          </div>
+          <div class="pipeline-connector"><i class="fas fa-chevron-right"></i></div>
+          <div class="pipeline-step" data-step="5">
+            <div class="step-icon"><i class="fas fa-shield-halved"></i></div>
+            <div class="step-info">
+              <span class="step-number">Stage 5</span>
+              <h3>Watertight Repair</h3>
+              <p>PyMeshFix hole filling with Open3D fallback for fully closed meshes</p>
+            </div>
+          </div>
+          <div class="pipeline-connector"><i class="fas fa-chevron-right"></i></div>
+          <div class="pipeline-step" data-step="6">
+            <div class="step-icon"><i class="fas fa-camera"></i></div>
+            <div class="step-info">
+              <span class="step-number">Stage 6</span>
+              <h3>Evaluation</h3>
+              <p>38 multi-perspective screenshots at 3 elevation rings for visual QA</p>
+            </div>
+          </div>
+          <div class="pipeline-connector"><i class="fas fa-chevron-right"></i></div>
+          <div class="pipeline-step" data-step="7">
+            <div class="step-icon"><i class="fas fa-ruler-combined"></i></div>
+            <div class="step-info">
+              <span class="step-number">Stage 7</span>
+              <h3>Volume</h3>
+              <p>ArUco-calibrated real-world volume computation with auto-resolution tuning</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tech Stack -->
+    <div class="section section--dark">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Built With</span>
+          <h2 class="section-title">Technology Stack</h2>
+        </div>
+        <div class="tech-grid">
+          <div class="tech-card">
+            <div class="tech-icon"><i class="fab fa-python"></i></div>
+            <h3>Python</h3>
+            <p>Core pipeline</p>
+          </div>
+          <div class="tech-card">
+            <div class="tech-icon"><i class="fas fa-fire"></i></div>
+            <h3>PyTorch</h3>
+            <p>VGGT Model</p>
+          </div>
+          <div class="tech-card">
+            <div class="tech-icon"><i class="fas fa-cube"></i></div>
+            <h3>Open3D</h3>
+            <p>3D Processing</p>
+          </div>
+          <div class="tech-card">
+            <div class="tech-icon"><i class="fas fa-vector-square"></i></div>
+            <h3>Trimesh</h3>
+            <p>Mesh Analysis</p>
+          </div>
+          <div class="tech-card">
+            <div class="tech-icon"><i class="fas fa-microchip"></i></div>
+            <h3>CUDA / Warp</h3>
+            <p>GPU Acceleration</p>
+          </div>
+          <div class="tech-card">
+            <div class="tech-icon"><i class="fas fa-qrcode"></i></div>
+            <h3>ArUco</h3>
+            <p>Scale Reference</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SCREEN 2: INPUT ========== -->
+  <section class="screen screen--input" id="screen-input">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Step 1</span>
+        <h2 class="section-title">Upload Input Images</h2>
+        <p class="section-desc">Provide multi-view photographs of the target object alongside an ArUco reference cube
+        </p>
+      </div>
+
+      <!-- Upload Area -->
+      <div class="upload-area" id="upload-area">
+        <div class="upload-zone" id="upload-zone">
+          <div class="upload-icon">
+            <i class="fas fa-cloud-arrow-up"></i>
+          </div>
+          <h3>Drop images here</h3>
+          <p>or click to browse your files</p>
+          <span class="upload-formats">JPG, PNG, BMP, TIFF, WEBP</span>
+          <input type="file" id="file-input" multiple accept=".jpg,.jpeg,.png,.bmp,.tiff,.webp" hidden>
+        </div>
+
+        <!-- Image Preview Grid -->
+        <div class="preview-grid" id="preview-grid"></div>
+
+        <!-- Upload Info -->
+        <div class="upload-info" id="upload-info" style="display: none;">
+          <div class="info-item">
+            <i class="fas fa-images"></i>
+            <span id="image-count">0 images</span>
+          </div>
+          <div class="info-item">
+            <i class="fas fa-weight-hanging"></i>
+            <span id="total-size">0 MB</span>
+          </div>
+          <button class="btn btn-ghost btn-sm" id="clear-btn">
+            <i class="fas fa-trash-alt"></i> Clear All
+          </button>
+        </div>
+      </div>
+
+      <!-- Reference Cube Size -->
+      <div class="config-panel">
+        <h3 class="config-title"><i class="fas fa-ruler-combined"></i> Reference Cube Size (arUco)</h3>
+        <div class="config-grid">
+          <div class="config-group">
+            <label for="ref-size">Cube Side Length (cm)</label>
+            <div class="input-wrapper">
+              <input type="number" id="ref-size" value="14.0" min="1" max="100" step="0.5">
+              <span class="input-suffix">cm</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action -->
+      <div class="input-actions">
+        <button class="btn btn-primary btn-lg" id="start-pipeline-btn">
+          <i class="fas fa-rocket"></i>
+          <span>Run Pipeline</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SCREEN 3: PROCESSING ========== -->
+  <section class="screen screen--processing" id="screen-processing">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Processing</span>
+        <h2 class="section-title">Pipeline Execution</h2>
+        <p class="section-desc">Running 7 automated stages — from raw images to measured 3D volumes</p>
+      </div>
+
+      <!-- Overall Progress -->
+      <div class="progress-overview">
+        <div class="progress-bar-container">
+          <div class="progress-bar" id="overall-progress" style="width: 0%"></div>
+        </div>
+        <div class="progress-stats">
+          <span class="progress-percent" id="progress-percent">0%</span>
+          <span class="progress-eta" id="progress-eta">Estimating time...</span>
+        </div>
+      </div>
+
+      <!-- Stage Cards -->
+      <div class="stages-grid">
+        <div class="stage-card" id="stage-1" data-stage="1">
+          <div class="stage-status">
+            <div class="status-indicator pending"></div>
+          </div>
+          <div class="stage-icon"><i class="fas fa-brain"></i></div>
+          <div class="stage-content">
+            <h3>Stage 1 — Model Inference</h3>
+            <p>VGGT-1B forward pass on input images</p>
+            <div class="stage-details">
+              <span class="detail"><i class="fas fa-microchip"></i> CUDA auto-detect</span>
+              <span class="detail"><i class="fas fa-images"></i> Max 7 frames</span>
+            </div>
+          </div>
+          <div class="stage-progress">
+            <div class="mini-progress">
+              <div class="mini-bar" style="width: 0%"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="stage-connector">
+          <div class="connector-line"></div>
+          <div class="connector-arrow"><i class="fas fa-arrow-down"></i></div>
+        </div>
+
+        <div class="stage-card" id="stage-2" data-stage="2">
+          <div class="stage-status">
+            <div class="status-indicator pending"></div>
+          </div>
+          <div class="stage-icon"><i class="fas fa-cloud"></i></div>
+          <div class="stage-content">
+            <h3>Stage 2 — PLY Export</h3>
+            <p>Confidence filter + outlier removal → colored point cloud</p>
+            <div class="stage-details">
+              <span class="detail"><i class="fas fa-filter"></i> Adaptive threshold</span>
+              <span class="detail"><i class="fas fa-chart-bar"></i> k=20, σ=2.5</span>
+            </div>
+          </div>
+          <div class="stage-progress">
+            <div class="mini-progress">
+              <div class="mini-bar" style="width: 0%"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="stage-connector">
+          <div class="connector-line"></div>
+          <div class="connector-arrow"><i class="fas fa-arrow-down"></i></div>
+        </div>
+
+        <div class="stage-card" id="stage-3" data-stage="3">
+          <div class="stage-status">
+            <div class="status-indicator pending"></div>
+          </div>
+          <div class="stage-icon"><i class="fas fa-scissors"></i></div>
+          <div class="stage-content">
+            <h3>Stage 3 — Clean & Extract</h3>
+            <p>RANSAC leveling, floor cut, DBSCAN clustering</p>
+            <div class="stage-details">
+              <span class="detail"><i class="fas fa-layer-group"></i> Object segmentation</span>
+              <span class="detail"><i class="fas fa-qrcode"></i> ArUco detection</span>
+            </div>
+          </div>
+          <div class="stage-progress">
+            <div class="mini-progress">
+              <div class="mini-bar" style="width: 0%"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="stage-connector">
+          <div class="connector-line"></div>
+          <div class="connector-arrow"><i class="fas fa-arrow-down"></i></div>
+        </div>
+
+        <div class="stage-card" id="stage-4" data-stage="4">
+          <div class="stage-status">
+            <div class="status-indicator pending"></div>
+          </div>
+          <div class="stage-icon"><i class="fas fa-cubes"></i></div>
+          <div class="stage-content">
+            <h3>Stage 4 — Poisson Reconstruction</h3>
+            <p>Adaptive depth 7–11, density filter, manifold cleanup</p>
+            <div class="stage-details">
+              <span class="detail"><i class="fas fa-shapes"></i> Per-object mesh</span>
+              <span class="detail"><i class="fas fa-object-group"></i> Scene merge</span>
+            </div>
+          </div>
+          <div class="stage-progress">
+            <div class="mini-progress">
+              <div class="mini-bar" style="width: 0%"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="stage-connector">
+          <div class="connector-line"></div>
+          <div class="connector-arrow"><i class="fas fa-arrow-down"></i></div>
+        </div>
+
+        <div class="stage-card" id="stage-5" data-stage="5">
+          <div class="stage-status">
+            <div class="status-indicator pending"></div>
+          </div>
+          <div class="stage-icon"><i class="fas fa-shield-halved"></i></div>
+          <div class="stage-content">
+            <h3>Stage 5 — Watertight Repair</h3>
+            <p>PyMeshFix hole filling + Open3D fallback</p>
+            <div class="stage-details">
+              <span class="detail"><i class="fas fa-rotate"></i> Up to 3 retries</span>
+              <span class="detail"><i class="fas fa-palette"></i> Color transfer</span>
+            </div>
+          </div>
+          <div class="stage-progress">
+            <div class="mini-progress">
+              <div class="mini-bar" style="width: 0%"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="stage-connector">
+          <div class="connector-line"></div>
+          <div class="connector-arrow"><i class="fas fa-arrow-down"></i></div>
+        </div>
+
+        <div class="stage-card" id="stage-6" data-stage="6">
+          <div class="stage-status">
+            <div class="status-indicator pending"></div>
+          </div>
+          <div class="stage-icon"><i class="fas fa-camera"></i></div>
+          <div class="stage-content">
+            <h3>Stage 6 — Evaluation</h3>
+            <p>38 multi-perspective screenshots for visual QA</p>
+            <div class="stage-details">
+              <span class="detail"><i class="fas fa-circle-dot"></i> 3 elevation rings</span>
+              <span class="detail"><i class="fas fa-compass"></i> 12 azimuths × 30°</span>
+            </div>
+          </div>
+          <div class="stage-progress">
+            <div class="mini-progress">
+              <div class="mini-bar" style="width: 0%"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="stage-connector">
+          <div class="connector-line"></div>
+          <div class="connector-arrow"><i class="fas fa-arrow-down"></i></div>
+        </div>
+
+        <div class="stage-card" id="stage-7" data-stage="7">
+          <div class="stage-status">
+            <div class="status-indicator pending"></div>
+          </div>
+          <div class="stage-icon"><i class="fas fa-ruler-combined"></i></div>
+          <div class="stage-content">
+            <h3>Stage 7 — Volume Computation</h3>
+            <p>ArUco-calibrated real-world volume with auto-resolution</p>
+            <div class="stage-details">
+              <span class="detail"><i class="fas fa-scale-balanced"></i> Scale: k = V_real / V_mesh</span>
+              <span class="detail"><i class="fas fa-check-double"></i> Δ &lt; 1.5% convergence</span>
+            </div>
+          </div>
+          <div class="stage-progress">
+            <div class="mini-progress">
+              <div class="mini-bar" style="width: 0%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </section>
+
+  <!-- ========== SCREEN 4: RESULT ========== -->
+  <section class="screen screen--result" id="screen-result">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Results</span>
+        <h2 class="section-title">Reconstruction Results</h2>
+        <p class="section-desc">3D reconstruction complete — explore the generated meshes and volume measurements</p>
+      </div>
+
+      <!-- Summary Cards -->
+      <div class="result-summary">
+        <div class="summary-card summary-card--time">
+          <div class="summary-icon"><i class="fas fa-stopwatch"></i></div>
+          <div class="summary-data">
+            <span class="summary-value" id="result-time">42.7s</span>
+            <span class="summary-label">Total Time</span>
+          </div>
+        </div>
+        <div class="summary-card summary-card--points">
+          <div class="summary-icon"><i class="fas fa-cloud"></i></div>
+          <div class="summary-data">
+            <span class="summary-value" id="result-points">84,231</span>
+            <span class="summary-label">Point Cloud</span>
+          </div>
+        </div>
+        <div class="summary-card summary-card--mesh">
+          <div class="summary-icon"><i class="fas fa-cubes"></i></div>
+          <div class="summary-data">
+            <span class="summary-value" id="result-faces">12,448</span>
+            <span class="summary-label">Mesh Faces</span>
+          </div>
+        </div>
+        <div class="summary-card summary-card--wt">
+          <div class="summary-icon"><i class="fas fa-check-circle"></i></div>
+          <div class="summary-data">
+            <span class="summary-value" id="result-watertight">Yes</span>
+            <span class="summary-label">Watertight</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3D Viewer Mockup -->
+      <div class="viewer-panel">
+        <div class="viewer-header">
+          <h3><i class="fas fa-cube"></i> 3D Mesh Viewer</h3>
+          <div class="viewer-controls">
+            <button class="viewer-btn active" id="view-object" data-view="object"><i class="fas fa-cube"></i>
+              Object</button>
+            <button class="viewer-btn" id="view-aruco" data-view="aruco"><i class="fas fa-qrcode"></i> ArUco</button>
+            <button class="viewer-btn" id="view-scene" data-view="scene"><i class="fas fa-earth-americas"></i>
+              Scene</button>
+            <button class="viewer-btn" id="view-pointcloud" data-view="pointcloud"><i class="fas fa-cloud"></i>
+              Points</button>
+          </div>
+        </div>
+        <div class="viewer-canvas" id="viewer-canvas">
+          <canvas id="three-canvas"></canvas>
+          <div id="viewer-loading" class="viewer-loading" style="display:none;">
+            <i class="fas fa-spinner fa-spin"></i>
+            <span>Loading 3D model...</span>
+          </div>
+          <p class="viewer-hint"><i class="fas fa-arrows-rotate"></i> Interactive 3D viewer — drag to rotate, scroll to zoom</p>
+        </div>
+      </div>
+
+      <!-- Volume Results Table -->
+      <div class="volume-panel">
+        <div class="volume-header">
+          <h3><i class="fas fa-ruler-combined"></i> Volume Measurements</h3>
+          <span class="volume-badge">ArUco-calibrated</span>
+        </div>
+        <div class="volume-table-wrapper">
+          <table class="volume-table" id="volume-table">
+            <thead>
+              <tr>
+                <th>Object</th>
+                <th>Size X</th>
+                <th>Size Y</th>
+                <th>Size Z</th>
+                <th>Volume (cm³)</th>
+                <th>Method</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="object-tag obj">Object</span></td>
+                <td>18.42 cm</td>
+                <td>18.42 cm</td>
+                <td>35.87 cm</td>
+                <td><strong>4,231.5</strong></td>
+                <td><span class="method-badge">watertight</span></td>
+              </tr>
+              <tr>
+                <td><span class="object-tag ref">ArUco Ref</span></td>
+                <td>14.00 cm</td>
+                <td>14.00 cm</td>
+                <td>14.00 cm</td>
+                <td><strong>2,744.0</strong></td>
+                <td><span class="method-badge">watertight</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="scale-info">
+          <div class="scale-formula">
+            <span class="formula-label">Scale Factor</span>
+            <code>k = V_real / V_mesh = 2744.00 / 0.003841 = 714,397.81 cm³/unit³</code>
+          </div>
+          <div class="scale-formula">
+            <span class="formula-label">Linear Scale</span>
+            <code>s = k^(1/3) = 89.434 cm/unit</code>
+          </div>
+        </div>
+      </div>
+
+      <!-- Output Files -->
+      <div class="output-panel">
+        <div class="output-header">
+          <h3><i class="fas fa-folder-open"></i> Output Files</h3>
+        </div>
+        <div class="file-tree">
+          <div class="file-folder open">
+            <div class="folder-header" data-folder="output">
+              <i class="fas fa-chevron-down"></i>
+              <i class="fas fa-folder-open"></i>
+              <span>output/</span>
+            </div>
+            <div class="folder-children">
+              <div class="file-item"><i class="fas fa-file"></i> <span>points.ply</span> <span class="file-size">12.4
+                  MB</span></div>
+              <div class="file-item"><i class="fas fa-file"></i> <span>predictions.npz</span> <span
+                  class="file-size">89.2 MB</span></div>
+              <div class="file-folder open">
+                <div class="folder-header" data-folder="clean">
+                  <i class="fas fa-chevron-down"></i>
+                  <i class="fas fa-folder-open"></i>
+                  <span>clean_objects/</span>
+                </div>
+                <div class="folder-children">
+                  <div class="file-item"><i class="fas fa-file"></i> <span>obj.ply</span> <span class="file-size">3.1
+                      MB</span></div>
+                  <div class="file-item"><i class="fas fa-file"></i> <span>box.ply</span> <span class="file-size">1.8
+                      MB</span></div>
+                </div>
+              </div>
+              <div class="file-folder open">
+                <div class="folder-header" data-folder="mesh">
+                  <i class="fas fa-chevron-down"></i>
+                  <i class="fas fa-folder-open"></i>
+                  <span>mesh/</span>
+                </div>
+                <div class="folder-children">
+                  <div class="file-item"><i class="fas fa-file"></i> <span>object_0_recon.ply</span> <span
+                      class="file-size">2.4 MB</span></div>
+                  <div class="file-item"><i class="fas fa-file"></i> <span>object_0.ply</span> <span
+                      class="file-size">2.6 MB</span></div>
+                  <div class="file-item"><i class="fas fa-file"></i> <span>object_0.stl</span> <span
+                      class="file-size">4.1 MB</span></div>
+                  <div class="file-item"><i class="fas fa-file"></i> <span>scene.ply</span> <span class="file-size">5.2
+                      MB</span></div>
+                  <div class="file-item"><i class="fas fa-file"></i> <span>scene_colour.ply</span> <span
+                      class="file-size">7.8 MB</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="result-actions">
+        <button class="btn btn-primary btn-lg" id="result-restart-btn">
+          <i class="fas fa-rotate-left"></i>
+          <span>New Reconstruction</span>
+        </button>
+        <button class="btn btn-outline btn-lg" id="result-download-btn">
+          <i class="fas fa-download"></i>
+          <span>Download All</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <span class="footer-name">ICT</span>
+        </div>
+        <p class="footer-text">Senior Capstone Project — Software Engineering</p>
+        <div class="footer-links">
+          <a href="#"><i class="fab fa-github"></i> GitHub</a>
+          <a href="#"><i class="fas fa-file-alt"></i> Documentation</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Three.js (ES module imports handled in app.js via importmap) -->
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.164.1/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.164.1/examples/jsm/"
+      }
+    }
+  </script>
+  <script type="module" src="app.js"></script>
+</body>
+
+</html>
